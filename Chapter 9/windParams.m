@@ -1,0 +1,10 @@
+%% Wind parameters
+P.wind_n = 0;
+P.wind_e = 0;
+P.wind_d = 0;
+P.L_u = 200;
+P.L_v = 200;
+P.L_w = 50;
+P.sigma_u = 1.06*0;
+P.sigma_v = 1.06*0;
+P.sigma_w = .7*0;
