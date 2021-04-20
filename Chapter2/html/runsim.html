@@ -1,0 +1,250 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>runsim</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-01-25"><meta name="DC.source" content="runsim.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Vehicle Attitude</a></li><li><a href="#3">Vehicle Rendering</a></li></ul></div><pre class="codeinput">clear
+close <span class="string">all</span>
+clc
+format <span class="string">long</span>
+format <span class="string">compact</span>
+</pre><h2 id="2">Vehicle Attitude</h2><p>Implement the v2b.m function which calculates the DCM from the vehicle frame to the body frame.  Then calculate the v2b DCM for a heading of 5 degrees, pitch of 10 degrees, and roll of 20 degrees.</p><pre class="codeinput">heading = 5*pi/180;
+pitch = 10*pi/180;
+roll = 20*pi/180;
+ypr = [heading, pitch, roll];
+R_v2b = v2b(ypr);
+disp(<span class="string">'R_v2b'</span>);
+disp(R_v2b);
+</pre><pre class="codeoutput">R_v2b
+   0.981060262190407   0.085831651177431  -0.173648177666930
+  -0.022734435055296   0.941293088598988   0.336824088833465
+   0.192363997186601  -0.326496935685365   0.925416578398323
+</pre><h2 id="3">Vehicle Rendering</h2><p>Populate the variables below such that the vehicle is placed at the origin with an altitude of 5 meters.  Orient the vehicle such that is it level with the horizon and pointed North. You can set all translational and angular velocities to zero.  Define this vehicle state to be at t = 0.</p><pre class="codeinput">pn = 0;                 <span class="comment">%North position</span>
+pe = 0;                 <span class="comment">%East position</span>
+pd = -5;                <span class="comment">%Down position</span>
+psi = 0;                <span class="comment">%Heading</span>
+theta = 0;              <span class="comment">%Pitch</span>
+phi = 0;                <span class="comment">%Roll</span>
+u = 0;                  <span class="comment">%Body-X translational velocity</span>
+v = 0;                  <span class="comment">%Body-Y translational velocity</span>
+w = 0;                  <span class="comment">%Body-Z translational velocity</span>
+p = 0;                  <span class="comment">%Body-X angular velocity</span>
+q = 0;                  <span class="comment">%Body-Y angular velocity</span>
+r = 0;                  <span class="comment">%Body-Z angular velocity</span>
+t = 0;                  <span class="comment">%Simulation time</span>
+<span class="comment">%</span>
+<span class="comment">%  Define the input to the drawVehicle() function</span>
+state = [pn, pe, pd, u, v, w, phi, theta, psi, p, q, r, t];
+</pre><p>Draw the vehicle using the drawVehicle function</p><pre class="codeinput">drawVehicle(state)
+</pre><img vspace="5" hspace="5" src="runsim_01.png" alt=""> <p>% Now define the vehicle state at t = 10 seconds.  Place the vehicle at 10 % meters North, 5 meters West, and an altitude of 10 meters. Orient the % vehicle such that it is pointed 30 degrees Northeast, the nose is up 20 % degrees from the horizon, and the left wing is tipped down 60 degrees. % You can again set all translational and angular velocities to zero.</p><pre class="codeinput">pn = 10;                <span class="comment">%North position</span>
+pe = -5;                <span class="comment">%East position</span>
+pd = -10;               <span class="comment">%Down position</span>
+psi = 120*pi/180;        <span class="comment">%Heading</span>
+theta = 20*pi/180;      <span class="comment">%Pitch</span>
+phi = 60*pi/180;       <span class="comment">%Roll</span>
+u = 0;                  <span class="comment">%Body-X translational velocity</span>
+v = 0;                  <span class="comment">%Body-Y translational velocity</span>
+w = 0;                  <span class="comment">%Body-Z translational velocity</span>
+p = 0;                  <span class="comment">%Body-X angular velocity</span>
+q = 0;                  <span class="comment">%Body-Y angular velocity</span>
+r = 0;                  <span class="comment">%Body-Z angular velocity</span>
+t = 0;                  <span class="comment">%Simulation time</span>
+<span class="comment">% %%</span>
+<span class="comment">% %  Define the input to the drawVehicle() function</span>
+state = [pn, pe, pd, u, v, w, phi, theta, psi, p, q, r, t];<span class="comment">% %%</span>
+<span class="comment">% % Draw the vehicle using the drawVehicle function</span>
+drawVehicle(state)
+<span class="comment">% %% The Stability Frame</span>
+<span class="comment">% % Implement the b2s.m function which calculates the DCM from the body frame</span>
+<span class="comment">% % to the stability frame.  Then calculate the b2s DCM for an angle of</span>
+<span class="comment">% % attack of 25 degrees.</span>
+alpha = 25*pi/180;
+R_b2s = b2s(alpha);
+disp(<span class="string">'R_b2s'</span>);
+disp(R_b2s);
+<span class="comment">% %% The Wind Frame</span>
+<span class="comment">% % Implement the s2w.m function which calculates the DCM from the stability</span>
+<span class="comment">% % frame to the wind frame.  Then calculate the s2w DCM for side-slip angle</span>
+<span class="comment">% % of 5 degrees.</span>
+beta = 5*pi/180;
+R_s2w = s2w(beta);
+disp(<span class="string">'R_s2w'</span>);
+disp(R_s2w);
+<span class="comment">% %% Computing the body to wind frame DCM</span>
+<span class="comment">% % Implement the b2w.m function which calculates the DCM from the body fame</span>
+<span class="comment">% % to the wind frame.  Then calculat the b2w DCM for an angle of attack of 3</span>
+<span class="comment">% % degrees and side slip of -4 degrees.</span>
+alpha = 3*pi/180;
+beta = -4*pi/180;
+R_b2w = b2w(alpha, beta);
+disp(<span class="string">'R_b2w'</span>);
+disp(R_b2w);
+</pre><pre class="codeoutput">R_b2s
+   0.906307787036650                   0   0.422618261740699
+                   0   1.000000000000000                   0
+  -0.422618261740699                   0   0.906307787036650
+R_s2w
+   0.996194698091746   0.087155742747658                   0
+  -0.087155742747658   0.996194698091746                   0
+                   0                   0   1.000000000000000
+R_b2w
+   0.996196923398857  -0.069756473744125   0.052208468483932
+   0.069660874921215   0.997564050259824   0.003650771757535
+  -0.052335956242944                   0   0.998629534754574
+</pre><img vspace="5" hspace="5" src="runsim_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear
+close all
+clc
+format long
+format compact
+%% Vehicle Attitude
+% Implement the v2b.m function which calculates the DCM from the vehicle
+% frame to the body frame.  Then calculate the v2b DCM for a heading of 5
+% degrees, pitch of 10 degrees, and roll of 20 degrees.
+heading = 5*pi/180;
+pitch = 10*pi/180;
+roll = 20*pi/180;
+ypr = [heading, pitch, roll];
+R_v2b = v2b(ypr);
+disp('R_v2b');
+disp(R_v2b);
+%% Vehicle Rendering
+% Populate the variables below such that the vehicle is placed at the origin
+% with an altitude of 5 meters.  Orient the vehicle such that is it level
+% with the horizon and pointed North. You can set all translational and 
+% angular velocities to zero.  Define this vehicle state to be at t = 0.
+pn = 0;                 %North position
+pe = 0;                 %East position
+pd = -5;                %Down position
+psi = 0;                %Heading
+theta = 0;              %Pitch
+phi = 0;                %Roll
+u = 0;                  %Body-X translational velocity
+v = 0;                  %Body-Y translational velocity
+w = 0;                  %Body-Z translational velocity
+p = 0;                  %Body-X angular velocity
+q = 0;                  %Body-Y angular velocity
+r = 0;                  %Body-Z angular velocity
+t = 0;                  %Simulation time
+%
+%  Define the input to the drawVehicle() function
+state = [pn, pe, pd, u, v, w, phi, theta, psi, p, q, r, t];
+%%
+% Draw the vehicle using the drawVehicle function
+drawVehicle(state)
+%%
+% % Now define the vehicle state at t = 10 seconds.  Place the vehicle at 10
+% % meters North, 5 meters West, and an altitude of 10 meters. Orient the
+% % vehicle such that it is pointed 30 degrees Northeast, the nose is up 20 
+% % degrees from the horizon, and the left wing is tipped down 60 degrees. 
+% % You can again set all translational and angular velocities to zero.  
+pn = 10;                %North position
+pe = -5;                %East position
+pd = -10;               %Down position
+psi = 120*pi/180;        %Heading
+theta = 20*pi/180;      %Pitch
+phi = 60*pi/180;       %Roll
+u = 0;                  %Body-X translational velocity
+v = 0;                  %Body-Y translational velocity
+w = 0;                  %Body-Z translational velocity
+p = 0;                  %Body-X angular velocity
+q = 0;                  %Body-Y angular velocity
+r = 0;                  %Body-Z angular velocity
+t = 0;                  %Simulation time
+% %%
+% %  Define the input to the drawVehicle() function
+state = [pn, pe, pd, u, v, w, phi, theta, psi, p, q, r, t];% %%
+% % Draw the vehicle using the drawVehicle function
+drawVehicle(state)
+% %% The Stability Frame
+% % Implement the b2s.m function which calculates the DCM from the body frame
+% % to the stability frame.  Then calculate the b2s DCM for an angle of
+% % attack of 25 degrees.
+alpha = 25*pi/180;
+R_b2s = b2s(alpha);
+disp('R_b2s');
+disp(R_b2s);
+% %% The Wind Frame
+% % Implement the s2w.m function which calculates the DCM from the stability
+% % frame to the wind frame.  Then calculate the s2w DCM for side-slip angle
+% % of 5 degrees.
+beta = 5*pi/180;
+R_s2w = s2w(beta);
+disp('R_s2w');
+disp(R_s2w);
+% %% Computing the body to wind frame DCM
+% % Implement the b2w.m function which calculates the DCM from the body fame
+% % to the wind frame.  Then calculat the b2w DCM for an angle of attack of 3
+% % degrees and side slip of -4 degrees.
+alpha = 3*pi/180;
+beta = -4*pi/180;
+R_b2w = b2w(alpha, beta);
+disp('R_b2w');
+disp(R_b2w);
+##### SOURCE END #####
+--></body></html>
